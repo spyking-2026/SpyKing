@@ -1242,6 +1242,48 @@ body:not(.loaded) > *:not(#loadingScreen) {
         font-size: 2rem;
     }
 }
+
+/* Theme & Navbar refinements: softer red, simpler professional nav */
+:root {
+    --soft-red: #b71c1c;
+    --soft-red-2: #c62828;
+    --soft-shadow: rgba(198, 40, 40, 0.15);
+}
+
+.navbar .container { position: relative; }
+
+.nav-toggle {
+    display: none; /* default hidden on desktop */
+    background: transparent;
+    border: none;
+    color: var(--soft-red-2);
+    font-size: 1.4rem;
+    padding: 6px 10px;
+    border-radius: 6px;
+}
+
+/* override overly-bright elements to softer tones */
+.logo { color: var(--soft-red); text-shadow: 0 0 8px rgba(183,28,28,0.6); }
+.loader-text { color: var(--soft-red); text-shadow: 0 0 12px rgba(198,40,40,0.35); }
+.btn-primary, .btn-danger { background: linear-gradient(135deg, var(--soft-red-2), var(--soft-red)); border-color: rgba(183,28,28,0.8); box-shadow: 0 6px 18px var(--soft-shadow); }
+.nav-links a:hover { color: var(--soft-red-2); text-shadow: none; }
+.nav-links a::before { background: var(--soft-red); box-shadow: none; }
+.navbar { box-shadow: 0 2px 12px rgba(0,0,0,0.4); border-bottom: 1px solid rgba(183,28,28,0.12); }
+.hero { border-bottom-color: rgba(183,28,28,0.12); }
+
+/* mobile: show simple hamburger on right, dropdown clean */
+@media (max-width: 768px) {
+    .nav-toggle { display: inline-flex; position: absolute; right: 12px; top: 10px; }
+    .nav-links { right: 12px; left: auto; width: 220px; }
+    .nav-links.mobile-active { display: flex; }
+    .nav-links { background: rgba(10,10,10,0.9); border-radius: 8px; padding: 10px; border: 1px solid rgba(183,28,28,0.06); }
+    .nav-links a { color: #fff; padding: 10px 12px; border-radius: 6px; }
+    .nav-links a:hover { background: rgba(255,255,255,0.03); }
+}
+
+/* ensure full-screen fit on small devices */
+html, body { width: 100%; overflow-x: hidden; }
+
 =======
 * {
     margin: 0;
