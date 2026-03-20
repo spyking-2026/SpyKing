@@ -547,3 +547,29 @@ document.head.appendChild(flashStyle);
     }, 10000);
 
 })();
+
+// Mobile nav toggle and performance tweaks
+(function() {
+    const toggle = document.querySelector('.nav-toggle');
+    const navLinks = document.querySelector('.nav-links');
+    if (toggle && navLinks) {
+        toggle.addEventListener('click', () => {
+            navLinks.classList.toggle('mobile-active');
+        });
+
+        // close mobile menu on link click
+        navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+            navLinks.classList.remove('mobile-active');
+        }));
+    }
+
+    // Lazy-load images on mobile for performance
+    try {
+        document.querySelectorAll('img').forEach((img, idx) => {
+            // keep very first hero image eager, lazy others
+            if (idx > 0) img.loading = 'lazy';
+        });
+    } catch (e) {
+        // ignore
+    }
+})();
