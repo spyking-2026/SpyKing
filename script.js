@@ -554,13 +554,33 @@ document.head.appendChild(flashStyle);
     const navLinks = document.querySelector('.nav-links');
     if (toggle && navLinks) {
         toggle.addEventListener('click', () => {
-            navLinks.classList.toggle('mobile-active');
+            const isOpen = navLinks.classList.toggle('mobile-active');
+            toggle.classList.toggle('open', isOpen);
+            toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+            if (isOpen) {
+                // trap focus simply by moving focus to first link
+                const first = navLinks.querySelector('a'); if (first) first.focus();
+            } else {
+                toggle.focus();
+            }
         });
 
         // close mobile menu on link click
         navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
             navLinks.classList.remove('mobile-active');
+            toggle.classList.remove('open');
+            toggle.setAttribute('aria-expanded', 'false');
         }));
+
+        // close on Escape
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && navLinks.classList.contains('mobile-active')) {
+                navLinks.classList.remove('mobile-active');
+                toggle.classList.remove('open');
+                toggle.setAttribute('aria-expanded', 'false');
+                toggle.focus();
+            }
+        });
     }
 
     // Lazy-load images on mobile for performance
