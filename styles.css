@@ -1310,6 +1310,16 @@ body {
 /* ensure full-screen fit on small devices */
 html, body { width: 100%; overflow-x: hidden; }
 
+/* EMERGENCY: force-hide loader and restore nav visibility so page is usable immediately */
+.loading-screen { display: none !important; visibility: hidden !important; opacity: 0 !important; pointer-events: none !important; }
+
+@media (max-width: 768px) {
+    /* restore nav links to a simple visible list for immediate usability */
+    .nav-toggle { display: none !important; }
+    .nav-links { position: static !important; transform: none !important; display: flex !important; flex-direction: column !important; height: auto !important; width: 100% !important; background: transparent !important; padding: 0 !important; gap: 0.5rem !important; }
+    .nav-links a { padding: 10px 0.5rem !important; }
+}
+
 =======
 * {
     margin: 0;
