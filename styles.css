@@ -108,11 +108,12 @@ body {
     visibility: hidden;
 }
 
-/* Hide page content until loader finishes (keep loader visible) */
-body:not(.loaded) > *:not(#loadingScreen) {
+/* Loader-dependent hiding disabled to avoid site being invisible if JS errors occur.
+   If you want a loader that hides content, enable only after confirming JS runs correctly. */
+/* body:not(.loaded) > *:not(#loadingScreen) {
     visibility: hidden;
     pointer-events: none;
-}
+} */
 
 .loader-container {
     text-align: center;
